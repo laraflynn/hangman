@@ -46,7 +46,7 @@ def setPlayerNames():
 def setPhrase():
     if gameMode == 0: #PvP
         global phrase
-        phrase = input(playerTwo + ", pick the phrase to be guessed: ")
+        phrase = (str(input(playerTwo + ", pick the phrase to be guessed: "))).upper()
         hint = input(playerTwo + ", give a hint: ")
 
         os.system('cls' if os.name == 'nt' else 'clear') # clear the terminal
@@ -63,6 +63,7 @@ def setPhrase():
 # initialize hiddenPhrase based on given phrase
 def setHiddenPhrase():
     global hiddenPhrase
+    hiddenPhrase = ""
     for letter in phrase:
         if letter == ' ':
             hiddenPhrase += ' '
@@ -70,58 +71,110 @@ def setHiddenPhrase():
             hiddenPhrase += '*'
 
 # already checked for validity of guess, checked if not already guessed
-def updateHiddenPhrase(guess):
+def updateHiddenPhrase(difficulty, guess):
+    global chances
     if guess[0] in phrase:
         global hiddenPhrase
         tempHidden = ""
         for i in range(len(phrase)):
             if hiddenPhrase[i] != '*': # preserves spaces and guessed letters
-                tempHidden[i] = hiddenPhrase[i]
+                tempHidden += hiddenPhrase[i]
             elif phrase[i] == guess[0]:
-                tempHidden[i] = guess[0]
+                tempHidden += str(guess[0])
             else:
-                tempHidden[i] = '*'
+                tempHidden += "*"
         hiddenPhrase = tempHidden
     else:
-        global chances
         chances = chances - 1
+    print(hiddenPhrase)
+    draw(difficulty)
+    print(str(chances) + " chances left.")
+
 
 def checkWin():
     global playerOneWin
     global playerTwoWin
     if hiddenPhrase == phrase:
         playerOneWin = True
+        print(playerOne + " wins!")
     elif chances == 0:
         playerTwoWin = True
+        print(playerTwo + " wins!")
+
+
+def processInput(difficulty):
+    while not playerOneWin and not playerTwoWin:
+        guess = (str(input("Guess a letter: "))).upper()
+        global A
+        global Z
+        while not isinstance(guess, str) or len(guess) != 1 or ord(guess[0]) < A or ord(guess[0]) > Z or guess[0] not in letters:
+            print("Not a valid input, or letter has been guessed. Here are the letters that have not yet been guessed: ")
+            print(', '.join(letters))
+            print("")
+            guess = (str(input("Guess a letter: "))).upper()
+        global phrase
+        letters.remove(guess[0]) # removes a guessed letter
+        updateHiddenPhrase(difficulty, guess)
+        checkWin()
 
 
 def handleEasy():
     global chances
     chances = 10
-
+    processInput(0)
 
 def handleMedium():
     global chances
     chances = 6
-
+    processInput(1)
 
 def handleHard():
     global chances
     chances = 1
-    
-    while not playerOneWin and not playerTwoWin:
-        guess = (str(input("Guess a letter: "))).upper()
-        while not isinstance(guess, str) or len(guess) != 1 or guess[0] < A or guess[0] > Z:
-            guess = (str(input("Not a valid input. Guess a letter: "))).upper()
-            if guess[0] not in letters:
-                print("This letter has already guessed.")
-                print("These letters have not been guessed yet: ")
-                guess = (str(input("Already guessed. Guess a letter: "))).upper()
-        global phrase
-        letters.remove(guess[0]) # removes a guessed letter
-        updateHiddenPhrase(guess)
-        checkWin()
+    processInput(2)
 
+
+def draw(difficulty):
+    if difficulty == 0 and chances == 10:
+        drawGallows()
+    elif difficulty == 0 and chances == 9:
+        drawEasy9()
+    elif difficulty == 0 and chances == 8:
+        drawEasy8()
+    elif difficulty == 0 and chances == 7:
+        drawEasy7()
+    elif difficulty == 0 and chances == 6:
+        drawEasy6()
+    elif difficulty == 0 and chances == 5: 
+        drawEasy5()
+    elif difficulty == 0 and chances == 4:
+        drawEasy4()
+    elif difficulty == 0 and chances == 3:
+        drawEasy3()
+    elif difficulty == 0 and chances == 2:
+        drawEasy2()
+    elif difficulty == 0 and chances == 1:
+        drawEasy1()
+    elif difficulty == 0 and chances == 0:
+        drawEasy0()
+    elif difficulty == 1 and chances == 6:
+        drawGallows()
+    elif difficulty == 1 and chances == 5:
+        drawMedium5()
+    elif difficulty == 1 and chances == 4:
+        drawMedium4()
+    elif difficulty == 1 and chances == 3:
+        drawMedium3()
+    elif difficulty == 1 and chances == 2:
+        drawMedium2()
+    elif difficulty == 1 and chances == 1:
+        drawMedium1()
+    elif difficulty == 1 and chances == 0:
+        drawMedium0()
+    elif difficulty == 2 and chances == 1:
+        drawGallows()
+    elif difficulty == 2 and chances == 0:
+        drawHard()
 
 def drawGallows(): # initial board
     print("     _____  ")
@@ -131,8 +184,141 @@ def drawGallows(): # initial board
     print("          | ")
     print("    --------")
 
+def drawEasy9():
+    print("     _____  ")
+    print("    |     | ")
+    print("  𓁹       | ")
+    print("          | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy8():
+    print("     _____  ")
+    print("    |     | ")
+    print("  𓁹𓁹     | ")
+    print("          | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy7():
+    print("     _____  ")
+    print("    |     | ")
+    print("  𓁹𓂏𓁹   | ")
+    print("          | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy6():
+    print("     _____  ")
+    print("    |     | ")
+    print("  𓁹𓂏𓁹𓂈 | ")
+    print("          | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy5():
+    print("     _____  ")
+    print("    |     | ")
+    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
+    print("          | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy4():
+    print("     _____  ")
+    print("    |     | ")
+    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
+    print("    👚    | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy3():
+    print("     _____  ")
+    print("    |     | ")
+    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
+    print("   💪👚    | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy2():
+    print("     _____  ")
+    print("    |     | ")
+    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
+    print("   💪👚👎  | ")
+    print("          | ")
+    print("    --------")
+
+def drawEasy1():
+    print("     _____  ")
+    print("    |     | ")
+    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
+    print("   💪👚👎  | ")
+    print("   �     | ")
+    print("    --------")
+
+def drawEasy0():
+    print("     _____  ")
+    print("    |     | ")
+    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
+    print("   💪👚👎  | ")
+    print("   �𓂾  | ")
+    print("    --------")
+
+def drawMedium5():
+    print("     _____  ")
+    print("    |     | ")
+    print("    O     | ")
+    print("          | ")
+    print("          | ")
+    print("    --------")
+
+def drawMedium4():
+    print("     _____  ")
+    print("    |     | ")
+    print("    O     | ")
+    print("    |     | ")
+    print("          | ")
+    print("    --------")
+
+def drawMedium3():
+    print("     _____  ")
+    print("    |     | ")
+    print("    O     | ")
+    print("   ✌|     | ")
+    print("          | ")
+    print("    --------")
+
+def drawMedium2():
+    print("     _____  ")
+    print("    |     | ")
+    print("    O     | ")
+    print("   ✌|✌    | ")
+    print("          | ")
+    print("    --------")
+
+def drawMedium1():
+    print("     _____  ")
+    print("    |     | ")
+    print("    O     | ")
+    print("   ✌|✌    | ")
+    print("   /      | ")
+    print("    --------")
+
+def drawMedium0():
+    print("     _____  ")
+    print("    |     | ")
+    print("    O     | ")
+    print("   ✌|✌    | ")
+    print("   / \    | ")
+    print("    --------")
+
 def drawHard():
-    print("hard drawing")
+    print("     _____  ")
+    print("    |     | ")
+    print("    💀    | ")
+    print("          | ")
+    print("          | ")
+    print("    --------")
 
 
 if __name__ == '__main__':  
