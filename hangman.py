@@ -56,7 +56,16 @@ def setPhrase():
         print("The computer has chosen a phrase.")
         print("The category is: ")
     else:
-        print("ダメだね\nダメよ\nダメなのよ\n")
+        daK = u'\u30C0'
+        meK = u'\u30E1'
+        daH = u'\u3060'
+        neH = u'\u306D'
+        yoH = u'\u3088'
+        naH = u'\u306A'
+        noH = u'\u306E'
+        print("" + daK + meK + daH + neH)
+        print("" + daK + meK + yoH)
+        print("" + daK + meK + naH + noH + yoH)
     
     print("Player 1, you may begin guessing.")
 
@@ -187,7 +196,7 @@ def drawGallows(): # initial board
 def drawEasy9():
     print("     _____  ")
     print("    |     | ")
-    print("  𓁹       | ")
+    print("  o       | ")
     print("          | ")
     print("          | ")
     print("    --------")
@@ -195,7 +204,7 @@ def drawEasy9():
 def drawEasy8():
     print("     _____  ")
     print("    |     | ")
-    print("  𓁹𓁹     | ")
+    print(" oo     | ")
     print("          | ")
     print("          | ")
     print("    --------")
@@ -203,7 +212,7 @@ def drawEasy8():
 def drawEasy7():
     print("     _____  ")
     print("    |     | ")
-    print("  𓁹𓂏𓁹   | ")
+    print("  ooo   | ")
     print("          | ")
     print("          | ")
     print("    --------")
@@ -211,7 +220,7 @@ def drawEasy7():
 def drawEasy6():
     print("     _____  ")
     print("    |     | ")
-    print("  𓁹𓂏𓁹𓂈 | ")
+    print("  oooo | ")
     print("          | ")
     print("          | ")
     print("    --------")
@@ -219,7 +228,7 @@ def drawEasy6():
 def drawEasy5():
     print("     _____  ")
     print("    |     | ")
-    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
+    print(" ooooo | ")
     print("          | ")
     print("          | ")
     print("    --------")
@@ -227,41 +236,41 @@ def drawEasy5():
 def drawEasy4():
     print("     _____  ")
     print("    |     | ")
-    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
-    print("    👚    | ")
+    print(" ooooo | ")
+    print("    o    | ")
     print("          | ")
     print("    --------")
 
 def drawEasy3():
     print("     _____  ")
     print("    |     | ")
-    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
-    print("   💪👚    | ")
+    print(" ooooo | ")
+    print("   oo    | ")
     print("          | ")
     print("    --------")
 
 def drawEasy2():
     print("     _____  ")
     print("    |     | ")
-    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
-    print("   💪👚👎  | ")
+    print(" ooooo | ")
+    print("   ooo  | ")
     print("          | ")
     print("    --------")
 
 def drawEasy1():
     print("     _____  ")
     print("    |     | ")
-    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
-    print("   💪👚👎  | ")
-    print("   �     | ")
+    print(" ooooo | ")
+    print("   ooo | ")
+    print("   o     | ")
     print("    --------")
 
 def drawEasy0():
     print("     _____  ")
     print("    |     | ")
-    print(" 𓂈𓁹𓂏𓁹𓂈 | ")
-    print("   💪👚👎  | ")
-    print("   �𓂾  | ")
+    print(" ooooo | ")
+    print("   ooo  | ")
+    print("   oo  | ")
     print("    --------")
 
 def drawMedium5():
@@ -284,7 +293,7 @@ def drawMedium3():
     print("     _____  ")
     print("    |     | ")
     print("    O     | ")
-    print("   ✌|     | ")
+    print("   /|     | ")
     print("          | ")
     print("    --------")
 
@@ -292,7 +301,7 @@ def drawMedium2():
     print("     _____  ")
     print("    |     | ")
     print("    O     | ")
-    print("   ✌|✌    | ")
+    print("   /|\    | ")
     print("          | ")
     print("    --------")
 
@@ -300,7 +309,7 @@ def drawMedium1():
     print("     _____  ")
     print("    |     | ")
     print("    O     | ")
-    print("   ✌|✌    | ")
+    print("   /|\    | ")
     print("   /      | ")
     print("    --------")
 
@@ -308,14 +317,14 @@ def drawMedium0():
     print("     _____  ")
     print("    |     | ")
     print("    O     | ")
-    print("   ✌|✌    | ")
+    print("   /|\    | ")
     print("   / \    | ")
     print("    --------")
 
 def drawHard():
     print("     _____  ")
     print("    |     | ")
-    print("    💀    | ")
+    print("    :/    | ")
     print("          | ")
     print("          | ")
     print("    --------")
