@@ -18,6 +18,7 @@
 
 # used to clear terminal after player 2 inputs phrase
 import os
+import emoji
 
 A = 65
 Z = 90
@@ -44,8 +45,8 @@ def setPlayerNames():
     
 
 def setPhrase():
+    global phrase
     if gameMode == 0: #PvP
-        global phrase
         phrase = (str(input(playerTwo + ", pick the phrase to be guessed: "))).upper()
         hint = input(playerTwo + ", give a hint: ")
 
@@ -53,8 +54,17 @@ def setPhrase():
 
         print("The hint is: " + hint)
     elif gameMode == 1: #PvCPU; to be implemented
+        # open file
+        # choose random int based on file line #
+        # scan until line # reached
+        # read line, parse by commas, save phrase and hint
+        import random
+        rawstr = random.choice(list(open('dict.txt')))
+        rawstrsplit = rawstr.split(",")
+        phrase = rawstrsplit[1].upper()
         print("The computer has chosen a phrase.")
-        print("The category is: ")
+        hint = rawstrsplit[0]
+        print("The hint is: " + hint)
     else:
         print("ダメだね\nダメよ\nダメなのよ\n")
     
@@ -67,8 +77,11 @@ def setHiddenPhrase():
     for letter in phrase:
         if letter == ' ':
             hiddenPhrase += ' '
-        else:
+        elif letter == '\'':
+            hiddenPhrase += '\''
+        elif letter != '\n':
             hiddenPhrase += '*'
+    print(hiddenPhrase)
 
 # already checked for validity of guess, checked if not already guessed
 def updateHiddenPhrase(difficulty, guess):
@@ -77,7 +90,8 @@ def updateHiddenPhrase(difficulty, guess):
         global hiddenPhrase
         tempHidden = ""
         for i in range(len(phrase)):
-            if hiddenPhrase[i] != '*': # preserves spaces and guessed letters
+            # preserves spaces and apostrophes and guessed letters
+            if hiddenPhrase[i] != '*':
                 tempHidden += hiddenPhrase[i]
             elif phrase[i] == guess[0]:
                 tempHidden += str(guess[0])
@@ -292,7 +306,7 @@ def drawMedium2():
     print("     _____  ")
     print("    |     | ")
     print("    O     | ")
-    print("   ✌|✌    | ")
+    print("   ✌|✌   | ")
     print("          | ")
     print("    --------")
 
@@ -300,7 +314,7 @@ def drawMedium1():
     print("     _____  ")
     print("    |     | ")
     print("    O     | ")
-    print("   ✌|✌    | ")
+    print("   ✌|✌   | ")
     print("   /      | ")
     print("    --------")
 
@@ -308,16 +322,16 @@ def drawMedium0():
     print("     _____  ")
     print("    |     | ")
     print("    O     | ")
-    print("   ✌|✌    | ")
+    print("   ✌|✌   | ")
     print("   / \    | ")
     print("    --------")
 
 def drawHard():
     print("     _____  ")
     print("    |     | ")
-    print("    💀    | ")
-    print("          | ")
-    print("          | ")
+    print("    O     | ")
+    print("   /|\    | ")
+    print("   / \    | ")
     print("    --------")
 
 

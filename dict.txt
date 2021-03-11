@@ -1,0 +1,21 @@
+character,jack frost
+character,bruno
+character,giorno
+location,berlin
+location,san fransisco
+location,the university of texas at austin
+location,yogurtland
+location,my room
+anime,jujutsu kaisen
+anime,ouran high school host club
+anime,jojo's bizarre adventure
+celebrity,nicki minaj
+celebrity,benedict cumberbatch
+celebrity,jojo siwa
+movie,shark tale
+movie,the bee movie
+movie,minions
+movie,a bug's life
+movie,ice age
+movie,shrek
+song,world is mine
